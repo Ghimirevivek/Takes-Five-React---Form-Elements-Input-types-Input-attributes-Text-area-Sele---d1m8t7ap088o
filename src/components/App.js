@@ -1,39 +1,39 @@
 import React,{ useState } from "react";
  function App() {
-  const [page, setPage] = useState(1);
-  const [start, setStart] = useState(1);
-  const [end, setEnd] = useState(5);
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
-  const update = () => {
-    const display = [];
-    for (let i = start; i <= end; i++) {
-      display.push(<div key={i}>{i}</div>);
-    }
-    return display;
-  };
-  const prevpage = () => {
-    setPage(page - 1);
-    setStart((page - 2) * 5 + 1);
-    setEnd((page - 1) * 5);
-    if (page === 2) {
-      setPrevBtnDisabled(true);
-    }
-  };
+    const [page, setPage] = useState(1);
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
+
   const nextpage = () => {
     setPage(page + 1);
-    setStart((page - 1) * 5 + 1);
-    setEnd(page * 5);
-    setPrevBtnDisabled(false);
+    const newNumbers = [];
+    for (let i = (page + 1) * 5 - 4; i <= (page + 1) * 5; i++) {
+      newNumbers.push(i);
+    }
+    setNumbers(newNumbers);
   };
+
+  const prevpage = () => {
+    setPage(page - 1);
+    const newNumbers = [];
+    for (let i = (page - 2) * 5 + 1; i <= (page - 1) * 5; i++) {
+      newNumbers.push(i);
+    }
+    setNumbers(newNumbers);
+  };
+
   return (
-    <div className="App">
-      <div id="number-display">{update()}</div>
-      <button id="back-button" disabled={prevBtnDisabled} onClick={prevpage}>
-        Prev Page
+    <div>
+      <button id="back-button" onClick={prevpage} disabled={page === 1}>
+        Previous
       </button>
       <button id="next-button" onClick={nextpage}>
-        Next Page
+        Next
       </button>
+      <div>
+        {numbers.map((number) => (
+          <div key={number}>{number}</div>
+        ))}
+      </div>
     </div>
   );
 }
