@@ -1,12 +1,7 @@
-import React from 'react'
-
-import '../styles/App.css';
-const App = () => {
-  
-
-  return (
-    <div id="main">
-    const [page, setPage] = useState(1);
+import "./styles.css";
+import { useState } from "react";
+ function App() {
+  const [page, setPage] = useState(1);
   const [start, setStart] = useState(1);
   const [end, setEnd] = useState(5);
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true);
@@ -42,9 +37,5 @@ const App = () => {
       </button>
     </div>
   );
-    </div>
-  )
 }
-
-
 export default App;
